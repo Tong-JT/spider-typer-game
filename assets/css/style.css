@@ -45,6 +45,7 @@ body {
     align-items: flex-end;
     z-index: 2;
     bottom: 0;
+    margin-bottom: 5px;
 }
 
 #background {
@@ -57,7 +58,7 @@ body {
     background-repeat: repeat-x;
     background-size: contain;
     z-index: -1; 
-    animation: slide 40s linear infinite;
+    animation: slide 30s linear infinite;
 }
 #guy {
     height: 5em;
@@ -67,7 +68,6 @@ body {
 }
 
 #typing-area {
-    flex-grow: 1;
     border-radius: 20px;
     border: 2px solid rgb(124, 104, 125);
     margin-inline: 30px;
@@ -87,6 +87,7 @@ body {
 #mini-typer {
     margin: 30px;
     margin-inline-start: 50px;
+    width: 200px;
 }
 
 .mini-spider-type-box {
@@ -96,21 +97,24 @@ body {
     margin-top: 10px;
     background-color: rgba(203, 187, 239,0.4);
     font-family: 'Literata Book', sans-serif;
-                                                
+    width: 150px;                                          
 }
 
 .mini-word {
     margin: 0;
 }
 #text-printing {
-    flex-grow: 1;
     border-bottom: 2px solid rgb(124, 104, 125);
+    font-family: 'Literata Book', sans-serif;
+    font-size: x-large;
+    overflow: scroll;
 }
 #typing-area {
-    display: flex;
-    flex-direction: column;
+    padding-top: 20px;
+    display: grid;
     padding-inline: 20px;
-
+    grid-template-rows: 80% 20%;
+    height: 200px;
 }
 #input-field {
     background: none;
@@ -143,12 +147,28 @@ body {
     font-family: 'Young Serif', sans-serif;
     color: rgb(191, 174, 192);
 }
+.correct {
+    color: greenyellow
+}
+
+.incorrect {
+    color: red;
+    animation: wrong 0.2s linear;
+}
 
 @keyframes slide {
     0% {
-        transform: translateX(0); /* Start at the normal position */
+        transform: translateX(0);
     }
     100% {
-        transform: translateX(-66%); /* Slide it left by 50% of the image width */
+        transform: translateX(-80%);
     }
+}
+
+@keyframes wrong {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px) }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0) }
 }

@@ -6,8 +6,8 @@ async function generateQuote() {
         throw new Error(`Response status: ${response.status}`);
       }
       const json = await response.json();
-      console.log("Quote:", json.sentence);
-      console.log("Character:", json.character.name);
+
+      return `"${json.sentence}" ${json.character.name}.`
     } catch (error) {
       console.error(error.message);
     }
@@ -41,9 +41,62 @@ async function startMiniSpiderEvent() {
     sidebar.appendChild(miniSpiderTypeBox);
 }
 
-startMiniSpiderEvent();
-startMiniSpiderEvent();
-startMiniSpiderEvent();
-startMiniSpiderEvent();
-startMiniSpiderEvent();
-startMiniSpiderEvent();
+let textArea = document.getElementById('text-printing');
+let currentQuote = "";
+// 
+async function newQuote() {
+    inputField.value="";
+    textArea.textContent = null;
+    currentQuote = await generateQuote();
+    currentQuote.split('').forEach(char => {
+        const charSpan = document.createElement('span')
+        charSpan.innerText = char
+        textArea.appendChild(charSpan)
+    })
+}
+
+
+let charIndex = 0;
+let inputField = document.getElementById("input-field");
+inputField.addEventListener('input', listenForInput)
+
+function listenForInput() {
+    let typedText = inputField.value;
+    let curr_input_array = typedText.split("");
+    let quoteSpanArray = textArea.querySelectorAll('span');
+
+    quoteSpanArray.forEach((char, index) => {
+        let typedChar = curr_input_array[index]
+
+        // character not currently typed
+        if (typedChar == null) {
+        char.classList.remove('correct');
+        char.classList.remove('incorrect');
+
+        // correct character
+        } else if (typedChar === char.innerText) {
+        char.classList.add('correct');
+        char.classList.remove('incorrect');
+
+        // incorrect character
+        } else {
+        char.classList.add('incorrect');
+        char.classList.remove('correct');
+
+        }
+    });
+
+    if (typedText.length == currentQuote.length) {
+        newQuote();
+    }
+}
+
+function setUpScreen() {
+    startMiniSpiderEvent();
+    startMiniSpiderEvent();
+    startMiniSpiderEvent();
+    startMiniSpiderEvent();
+    newQuote();
+}
+
+setUpScreen();
