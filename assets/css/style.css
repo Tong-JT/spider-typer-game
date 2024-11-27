@@ -3,6 +3,7 @@ html, body {
     width: 100%;
     margin: 0;
     user-select: none;
+    color: whitesmoke;
 
     &::selection {
         background-color: transparent;
@@ -11,8 +12,36 @@ html, body {
 
 body {
     display: flex;
+    flex-direction: column;
 }
 
-.typer-screen {
+#typer-screen {
+    display: flex;
+    flex-direction: row;
     flex-grow: 1;
+    background-color: #3f234b;
+}
+#main-typer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+#main-info {
+    align-self: center;
+    text-align: center;
+}
+#graphics {
+    display: flex;
+    flex-direction: row;
+    justify-self: flex-end;
+    justify-content: space-around;
+    align-items: flex-end;
+    background-image: url(../img/dungeon.jpg);
+    background-repeat: repeat-x;
+    background-size: contain;
+    padding: 5px;
+}
+
+#guy {
+    height: 120px;
 }
