@@ -25,23 +25,130 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding: 20px;
+    border-right: 2px solid rgb(124, 104, 125);
+    position: relative;
 }
 #main-info {
     align-self: center;
     text-align: center;
 }
 #graphics {
+    overflow: hidden;
+    position: relative;
+}
+
+#characters {
+    position: absolute;
     display: flex;
     flex-direction: row;
-    justify-self: flex-end;
-    justify-content: space-around;
     align-items: flex-end;
+    z-index: 2;
+    bottom: 0;
+}
+
+#background {
+    overflow: hidden;
+}
+#background-image {
+    height: 15vw;
+    width: 600vw;
     background-image: url(../img/dungeon.jpg);
     background-repeat: repeat-x;
     background-size: contain;
-    padding: 5px;
+    z-index: -1; 
+    animation: slide 40s linear infinite;
+}
+#guy {
+    height: 5em;
+}
+#spooder {
+    height: 9em;
 }
 
-#guy {
-    height: 120px;
+#typing-area {
+    flex-grow: 1;
+    border-radius: 20px;
+    border: 2px solid rgb(124, 104, 125);
+    margin-inline: 30px;
+    margin-block: 20px;
+}
+
+#distance {
+    font-family: 'Young Serif', sans-serif;
+    font-size: xx-large;
+}
+
+#timer, #mini-header{
+    font-family: 'Young Serif', sans-serif;
+    font-size: x-large;
+}
+
+#mini-typer {
+    margin: 30px;
+    margin-inline-start: 50px;
+}
+
+.mini-spider-type-box {
+    padding: 8px;
+    border: 2px solid rgb(124, 104, 125);
+    border-radius: 10px;
+    margin-top: 10px;
+    background-color: rgba(203, 187, 239,0.4);
+    font-family: 'Literata Book', sans-serif;
+                                                
+}
+
+.mini-word {
+    margin: 0;
+}
+#text-printing {
+    flex-grow: 1;
+    border-bottom: 2px solid rgb(124, 104, 125);
+}
+#typing-area {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 20px;
+
+}
+#input-field {
+    background: none;
+    border: none;
+    width: 100%;
+    color: whitesmoke;
+    font-size: large;
+    margin-block: 10px;
+    font-family: 'Literata Book', sans-serif;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+#ctrl-label {
+    position: absolute;
+    border: 3px solid rgb(191, 174, 192);
+    padding: 6px;
+    border-radius: 10px;
+    justify-self: right;
+    right: 0;
+    background-color: #3f234b;
+    transform: translateX(50%);
+    margin-top: 10px;
+}
+
+#ctrl {
+    margin: 0;
+    font-family: 'Young Serif', sans-serif;
+    color: rgb(191, 174, 192);
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0); /* Start at the normal position */
+    }
+    100% {
+        transform: translateX(-66%); /* Slide it left by 50% of the image width */
+    }
 }

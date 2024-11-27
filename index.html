@@ -2,23 +2,33 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Spider typer</title>
+        <title>Spider Typer | Escape the Giant Spider!</title>
         <meta charset="UTF-8">
+        <link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/img/icon.png">
         <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+        <link href="https://fonts.cdnfonts.com/css/young-serif" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/literata-book" rel="stylesheet">
+                
     </head>
 
     <body>
 
         <div id="typer-screen">
-
             <div id="main-typer">
                 <div id="main-info">
                     <div id="distance">
                         Distance from spider: 100m
                     </div>
                     <div id="timer">
-                        Time to escape: 60 secs
+                        Time spent running: 0.00 secs
                     </div>
+                </div>
+                <div id="typing-area">
+                    <div id="text-printing"></div>
+                    <input type="text" id="input-field" autofocus placeholder="Begin typing to start run...">                    
+                </div>
+                <div id="ctrl-label">
+                    <p id="ctrl">Ctrl</p>
                 </div>
             </div>
 
@@ -26,7 +36,9 @@
                 <div id="mini-header">
                     Mini spiders
                 </div>
+                <div id="mini-spider-sidebar">
 
+                </div>
 
             </div>
 
@@ -34,11 +46,16 @@
         
 
         <div id="graphics">
-            <div id="main-character">
-                <img src="/assets/img/guy.gif" id="guy">
+            <div id="characters">
+                <div id="giant-spider">
+                    <img src="/assets/img/spider.gif" id="spooder">
+                </div>
+                <div id="main-character">
+                    <img src="/assets/img/guy.gif" id="guy">
+                </div>
             </div>
-            <div id="giant-spider">
-                <img src="/assets/img/spider.gif" id="spooder">
+            <div id="background">
+                <div id="background-image"></div>
             </div>
         </div>
             <script type="module" src="/assets/js/script.js">
