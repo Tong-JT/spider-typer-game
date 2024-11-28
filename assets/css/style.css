@@ -11,14 +11,13 @@ html, body {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 68% 32%;
 }
 
 #typer-screen {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 80% 20%;
     background-color: #3f234b;
 }
 #main-typer {
@@ -61,10 +60,10 @@ body {
     animation: slide 30s linear infinite;
 }
 #guy {
-    height: 5em;
+    height: 3em;
 }
 #spooder {
-    height: 9em;
+    height: 8em;
 }
 
 #typing-area {
@@ -80,8 +79,14 @@ body {
 }
 
 #timer, #mini-header{
-    font-family: 'Young Serif', sans-serif;
-    font-size: x-large;
+    font-family: 'Literata Book', sans-serif;
+    font-size: large;
+    text-align: left;
+}
+#timer {
+    width: 600px;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
 }
 
 #mini-typer {
@@ -108,6 +113,7 @@ body {
     font-family: 'Literata Book', sans-serif;
     font-size: x-large;
     overflow: scroll;
+    white-space: pre-wrap;
 }
 #typing-area {
     padding-top: 20px;
@@ -148,12 +154,32 @@ body {
     color: rgb(191, 174, 192);
 }
 .correct {
-    color: greenyellow
+    color: greenyellow;
+    background-color: rgba(203, 187, 239,0.2);
 }
 
 .incorrect {
     color: red;
     animation: wrong 0.2s linear;
+    background-color: rgba(203, 187, 239,0.4);
+}
+
+.character-pic {
+    position: relative;
+}
+.speed-box {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 3px;
+    padding-inline: 7px;
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Young Serif', sans-serif;
+}
+.character-speed {
+    transform: translateY(-30px) translateX(-50%);
 }
 
 @keyframes slide {

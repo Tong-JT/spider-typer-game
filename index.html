@@ -20,7 +20,9 @@
                         Distance from spider: 100m
                     </div>
                     <div id="timer">
-                        Time spent running: 0.00 secs
+                        <div id="timebox">Time spent running: <span id="minutes">00</span> mins <span id="seconds">00</span> secs </div> 
+                        <div id="wpmbox">|  WPM: <span class="WPM">0</span> </div>
+                        <div id="errorbox">|  Errors: <span id="errors">0</span></div>
                     </div>
                 </div>
                 <div id="typing-area">
@@ -47,11 +49,13 @@
 
         <div id="graphics">
             <div id="characters">
-                <div id="giant-spider">
-                    <img src="/assets/img/spider.gif" id="spooder">
+                <div id="giant-spider" class="character-pic">
+                    <div class="speed-box" id="spider-speed">20</div>
+                    <img src="/assets/img/spider.gif" id="spooder" draggable="false">
                 </div>
-                <div id="main-character">
-                    <img src="/assets/img/guy.gif" id="guy">
+                <div id="main-character" class="character-pic">
+                    <div class="speed-box WPM character-speed">0</div>
+                    <img src="/assets/img/guy.gif" id="guy" draggable="false">
                 </div>
             </div>
             <div id="background">
