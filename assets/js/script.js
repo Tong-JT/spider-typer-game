@@ -134,18 +134,10 @@ function updateDistance() {
     }
 }
 
-let loseAudio = new Audio('../assets/img/lose.mp3');
-
-function preloadAudio() {
-    loseAudio.load();
-}
 
 function stopGame() {
-    loseAudio.play();
     clearInterval(timer);
-
     inputField.disabled = true;
-
     alert("Game Over! Distance has reached 0.");
 }
 
@@ -203,7 +195,6 @@ async function startMiniSpiderEvent() {
 
 function setUpScreen() {
     newQuote();
-    preloadAudio();
     document.getElementById("main-character").style.transform = `translateX(210px)`;
     let distance = document.getElementById("distance-num");
     distance.innerText = startDistance;
