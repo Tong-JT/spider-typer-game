@@ -13,7 +13,7 @@ async function generateQuote() {
     }
 }
 
-// Generates a random word
+// Generates a random word using an API
 async function generateWord() {
     const url = "https://random-word-api.vercel.app/api?words=1";
     try {
@@ -49,6 +49,7 @@ let charIndex = 0;
 let gameStart = false;
 let errorCount = 0;
 let typedCharacterCount = 0;
+let startDistance = 200;
 
 function startRun() {
     let timer = setInterval(backgroundTime, 1000);
@@ -62,6 +63,7 @@ function backgroundTime() {
     updateTimer();
     updateWPM();
     updateSpiderSpeed();
+    updateDistance();
 }
 
 function updateTimer() {
@@ -95,6 +97,58 @@ function updateSpiderSpeed() {
     }
     spiderSpeed.innerText = spiderSpeedNum;
 }
+
+let maxDistance = 200;
+let minDistance = 30;
+
+function updateDistance() {
+    let distance = document.getElementById("distance-num");
+    let distanceNum = parseInt(distance.innerText);
+
+    let playerSpeed = parseInt(document.getElementById("character-speed").innerText);
+    let spiderSpeed = parseInt(document.getElementById("spider-speed").innerText);
+    
+    let movement = spiderSpeed - playerSpeed;
+    distanceNum -= movement;
+
+    distance.innerText = Math.max(distanceNum, 0);
+
+    let characterDistance = (distanceNum / startDistance) * (maxDistance - minDistance) + minDistance;
+    let spiderDistance = maxDistance - characterDistance;
+
+    if (characterDistance>800) {
+        document.getElementById("main-character").style.transform = `translateX(800px)`;
+    }
+    else {
+        document.getElementById("main-character").style.transform = `translateX(${characterDistance}px)`;
+    }
+    if (spiderDistance<-80) {
+        document.getElementById("giant-spider").style.transform = `translateX(-80px)`;
+    }
+    else {
+        document.getElementById("giant-spider").style.transform = `translateX(${spiderDistance}px)`;
+    }
+
+    if (distanceNum <= 0) {
+        stopGame();
+    }
+}
+
+let loseAudio = new Audio('../assets/img/lose.mp3');
+
+function preloadAudio() {
+    loseAudio.load();
+}
+
+function stopGame() {
+    loseAudio.play();
+    clearInterval(timer);
+
+    inputField.disabled = true;
+
+    alert("Game Over! Distance has reached 0.");
+}
+
 
 function listenForInput() {
     let typedText = inputField.value;
@@ -148,13 +202,22 @@ async function startMiniSpiderEvent() {
 }
 
 function setUpScreen() {
-    inputField.addEventListener('input', listenForInput);
-    startMiniSpiderEvent();
-    startMiniSpiderEvent();
-    startMiniSpiderEvent();
-    startMiniSpiderEvent();
     newQuote();
-    startRun();
+    preloadAudio();
+    document.getElementById("main-character").style.transform = `translateX(210px)`;
+    let distance = document.getElementById("distance-num");
+    distance.innerText = startDistance;
+    inputField.addEventListener('input', function() {
+        if (!gameStart) {
+            gameStart = true;
+            startMiniSpiderEvent();
+            startMiniSpiderEvent();
+            startMiniSpiderEvent();
+            startMiniSpiderEvent();
+            startRun();
+        }
+        listenForInput();
+    });;
 }
 
 setUpScreen();

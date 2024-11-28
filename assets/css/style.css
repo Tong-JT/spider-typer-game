@@ -60,10 +60,17 @@ body {
     animation: slide 30s linear infinite;
 }
 #guy {
+    position: sticky;
     height: 3em;
+    z-index: 1;
+    right: max(0, 100vw);
 }
 #spooder {
+    position: sticky;
     height: 8em;
+    left: max(0, 100vw);
+    z-index: 3;
+    margin-right: -10px;
 }
 
 #typing-area {
@@ -170,15 +177,17 @@ body {
 .speed-box {
     border: 2px solid;
     border-radius: 10px;
-    padding: 3px;
-    padding-inline: 7px;
+    padding: 2px;
+    padding-inline: 8px;
+    padding-top: 5px;
     position: absolute;
     top: -30%;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'Young Serif', sans-serif;
+    font-family: 'Minagi Bristone', sans-serif;
+                                                
 }
-.character-speed {
+#character-speed {
     transform: translateY(-30px) translateX(-50%);
 }
 
