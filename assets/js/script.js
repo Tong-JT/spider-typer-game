@@ -13,20 +13,20 @@ async function generateQuote() {
     }
 }
 
-// Generates a random word using an API
-async function generateWord() {
-    const url = "https://random-word-api.vercel.app/api?words=1";
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-        }
-        const json = await response.json();
-        return json[0];
-    } catch (error) {
-        console.error(error.message);
-    }
-}
+// // Generates a random word using an API
+// async function generateWord() {
+//     const url = "https://random-word-api.vercel.app/api?words=1";
+//     try {
+//         const response = await fetch(url);
+//         if (!response.ok) {
+//             throw new Error(`Response status: ${response.status}`);
+//         }
+//         const json = await response.json();
+//         return json[0];
+//     } catch (error) {
+//         console.error(error.message);
+//     }
+// }
 
 let textArea = document.getElementById('text-printing');
 let inputField = document.getElementById("input-field");
@@ -49,10 +49,10 @@ let charIndex = 0;
 let gameStart = false;
 let errorCount = 0;
 let typedCharacterCount = 0;
-let startDistance = 200;
+let startDistance = 100;
 
 function startRun() {
-    let timer = setInterval(backgroundTime, 1000);
+    setInterval(backgroundTime, 1000);
 }
 
 let timePassed = 0;
@@ -64,6 +64,7 @@ function backgroundTime() {
     updateWPM();
     updateSpiderSpeed();
     updateDistance();
+    updateBackgroundScroll();
 }
 
 function updateTimer() {
@@ -104,13 +105,11 @@ let minDistance = 30;
 function updateDistance() {
     let distance = document.getElementById("distance-num");
     let distanceNum = parseInt(distance.innerText);
-
     let playerSpeed = parseInt(document.getElementById("character-speed").innerText);
     let spiderSpeed = parseInt(document.getElementById("spider-speed").innerText);
-    
+
     let movement = spiderSpeed - playerSpeed;
     distanceNum -= movement;
-
     distance.innerText = Math.max(distanceNum, 0);
 
     let characterDistance = (distanceNum / startDistance) * (maxDistance - minDistance) + minDistance;
@@ -134,6 +133,18 @@ function updateDistance() {
     }
 }
 
+function updateBackgroundScroll() {
+    let characterSpeed = parseInt(document.getElementById("character-speed").innerText);
+    let backgroundScrollSpeed = 0.1 * characterSpeed;
+    let background = document.getElementById("background-image");
+    background.style.animationDuration = `${(50 / backgroundScrollSpeed)}s`;
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.key === 'a') {
+        event.preventDefault();
+    }
+});
 
 function stopGame() {
     clearInterval(timer);
@@ -180,18 +191,18 @@ function listenForInput() {
     }
 }
 
-// Mini spider event - Spider image animation, spider type box generation
-async function startMiniSpiderEvent() {
-    let sidebar = document.getElementById('mini-spider-sidebar');
-    let miniSpiderTypeBox = document.createElement('div');
-    const word = await generateWord();
+// // Mini spider event - Spider image animation, spider type box generation
+// async function startMiniSpiderEvent() {
+//     let sidebar = document.getElementById('mini-spider-sidebar');
+//     let miniSpiderTypeBox = document.createElement('div');
+//     const word = await generateWord();
 
-    miniSpiderTypeBox.className = 'mini-spider-type-box';
-    miniSpiderTypeBox.innerHTML = `
-        <p class="mini-word">${word}</p>
-    `;
-    sidebar.appendChild(miniSpiderTypeBox);
-}
+//     miniSpiderTypeBox.className = 'mini-spider-type-box';
+//     miniSpiderTypeBox.innerHTML = `
+//         <p class="mini-word">${word}</p>
+//     `;
+//     sidebar.appendChild(miniSpiderTypeBox);
+// }
 
 function setUpScreen() {
     newQuote();
@@ -201,10 +212,6 @@ function setUpScreen() {
     inputField.addEventListener('input', function() {
         if (!gameStart) {
             gameStart = true;
-            startMiniSpiderEvent();
-            startMiniSpiderEvent();
-            startMiniSpiderEvent();
-            startMiniSpiderEvent();
             startRun();
         }
         listenForInput();
@@ -212,3 +219,24 @@ function setUpScreen() {
 }
 
 setUpScreen();
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const popupOverlay = document.getElementById('popupOverlay');
+    const closePopup = document.getElementById('closePopup');
+
+    function openPopup() {
+        popupOverlay.style.display = 'block';
+    }
+    function closePopupFunc() {
+        popupOverlay.style.display = 'none';
+    }
+
+    openPopup();
+    closePopup.addEventListener('click', closePopupFunc);
+    popupOverlay.addEventListener('click', function (event) {
+        if (event.target === popupOverlay) {
+            closePopupFunc();
+        }
+    });
+});
