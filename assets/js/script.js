@@ -36,8 +36,9 @@ let errorCount = 0;
 let typedCharacterCount = 0;
 let startDistance = 100;
 
+let timer;
 function startRun() {
-    setInterval(backgroundTime, 1000);
+    timer = setInterval(backgroundTime, 1000);
 }
 
 let timePassed = 0;
@@ -62,6 +63,8 @@ function updateTimer() {
     secs.innerText = String(seconds).padStart(2, '0');
 }
 
+let fastestWpm = 0;
+let maxDistanceReached = 0;
 function updateWPM() {
     let charactersTyped = typedCharacterCount;
     let elapsedMinutes = timePassed / 60;
@@ -72,6 +75,9 @@ function updateWPM() {
         wpmDisplays.forEach(function(wpmDisplay) {
             wpmDisplay.textContent = wpm;
         });
+        if (wpm > fastestWpm) {
+            fastestWpm = wpm;
+        }
     }
 }
 
@@ -112,7 +118,7 @@ function updateDistance() {
     else {
         document.getElementById("giant-spider").style.transform = `translateX(${spiderDistance}px)`;
     }
-
+    maxDistanceReached = Math.max(maxDistanceReached, distanceNum);
     if (distanceNum <= 0) {
         stopGame();
     }
@@ -139,6 +145,19 @@ function stopGame() {
 
 function gameoverScreen() {
     let gameover = document.getElementById("gameoverOverlay");
+    let finalTimeDisplay = document.getElementById("final-time");
+    let fastestWpmDisplay = document.getElementById("fastest-wpm");
+    let finalErrorsDisplay = document.getElementById("final-errors");
+    let maxDistanceDisplay = document.getElementById("max-distance");
+
+    let minutes = Math.floor(timePassed / 60);
+    let seconds = timePassed % 60;
+    finalTimeDisplay.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    
+    fastestWpmDisplay.innerText = fastestWpm;
+    finalErrorsDisplay.innerText = errorCount;
+    maxDistanceDisplay.innerText = maxDistanceReached;
+
     gameover.style.display = "block";
 }
 

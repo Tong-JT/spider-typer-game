@@ -34,8 +34,16 @@
                     <div class="menu-header">
                         <h1 class="header-text"><span>Game over!</span></h1>
                     </div>
-                    <div class="menu-contents">
-                        The beast has caught you. Your journey is now over.
+                    <div class="menu-contents" id="final-stats">
+                        <p>
+                            The beast has caught you. Your journey is now over.
+                        </p>
+                        <div>
+                            <strong>Final Time: </strong><span id="final-time">00:00</span><br>
+                            <strong>Fastest WPM: </strong><span id="fastest-wpm">0</span><br>
+                            <strong>Errors: </strong><span id="final-errors">0</span><br>
+                            <strong>Max Distance: </strong><span id="max-distance">0</span> meters<br>
+                        </div>
                     </div>
                 </div>
                 <button id="restart-game" class="click-button">Restart</button>
