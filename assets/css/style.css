@@ -10,6 +10,7 @@ html, body {
     -o-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
+    background-color: #3f234b;
 
     &::selection {
         background-color: transparent;
@@ -22,9 +23,7 @@ body {
 }
 
 #typer-screen {
-    display: grid;
-    /* grid-template-columns: 80% 20%; */
-    background-color: #3f234b;
+    display: flex;
 }
 #main-typer {
     display: flex;
@@ -32,7 +31,6 @@ body {
     flex-grow: 1;
     padding-top: 20px;
     padding-inline: 120px;
-    /* border-right: 2px solid rgb(124, 104, 125); */
     position: relative;
 }
 #main-info {
@@ -57,7 +55,9 @@ body {
 #giant-spider, #main-character {
     margin-bottom: 5%;
 }
-
+#giant-spider {
+    z-index: 3;
+}
 #background {
     overflow: hidden;
     height: 100%;
@@ -80,7 +80,6 @@ body {
     position: sticky;
     height: 20vh;
     z-index: 3;
-    margin-right: -10px;
 }
 
 #typing-area {
@@ -105,42 +104,26 @@ body {
     display: grid;
     grid-template-columns: 3fr 1fr 1fr;
 }
-
-#mini-typer {
-    margin: 30px;
-    margin-inline-start: 50px;
-}
-
-.mini-spider-type-box {
-    padding: 8px;
-    border: 2px solid rgb(124, 104, 125);
-    border-radius: 10px;
-    margin-top: 10px;
-    background-color: rgba(203, 187, 239,0.4);
-    font-family: 'Literata Book', sans-serif;
-    width: 150px;                                          
-}
-
-.mini-word {
-    margin: 0;
-}
 #text-printing {
     border-bottom: 2px solid rgb(124, 104, 125);
     font-family: 'Literata Book', sans-serif;
     font-size: x-large;
     white-space: pre-wrap;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 #typing-area {
     padding-top: 20px;
-    display: grid;
     padding-inline: 20px;
-    grid-template-rows: 80% 20%;
-    height: 200px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 #input-field {
     background: none;
     border: none;
     width: 100%;
+    height: 30px;
     color: whitesmoke;
     font-size: large;
     margin-block: 10px;
@@ -153,23 +136,6 @@ body {
     }
 }
 
-/* #ctrl-label {
-    position: absolute;
-    border: 3px solid rgb(191, 174, 192);
-    padding: 6px;
-    border-radius: 10px;
-    justify-self: right;
-    right: 0;
-    background-color: #3f234b;
-    transform: translateX(50%);
-    margin-top: 10px;
-}
-
-#ctrl {
-    margin: 0;
-    font-family: 'Young Serif', sans-serif;
-    color: rgb(191, 174, 192);
-} */
 .correct {
     color: greenyellow;
     background-color: rgba(203, 187, 239,0.2);
@@ -205,51 +171,65 @@ body {
 
 
 .popup-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(35, 38, 92, 0.5);
+    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.4));
     z-index: 6;
 }
 
-.settings-menu {
+.popup-menu {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(125, 211, 250);
-    border: 3px solid rgb(32, 141, 213);
+    background-color: #3f234b;
+    border: 2px solid rgb(124, 104, 125);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.settings-header {
+.menu-header {
+    margin: 0;
     display: flex;
     flex-direction: row;
-    position: relative;
+    justify-content: space-between;
 }
-#settings-header-text {
+.header-text {
     color: white;
-    -webkit-text-stroke: 8px  rgb(4, 106, 181);
-    paint-order: stroke fill;
     margin: 0;
-    margin-block-end: 20px;
     z-index: 1;
+    font-family: 'Young Serif', sans-serif;
+    font-size: xx-large;
 }
-.settings-menu .close {
-    right: 0;
-    top: 0;
-    position: absolute;
-    justify-self: end;
-    font-size: 30px;
-    align-self: center;
-    cursor: pointer;
+#gameoverOverlay {
+    display: none;
+}
+.menu-contents {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    font-family: 'Literata Book', sans-serif;
+    font-size: large;
+    margin-bottom: 15px;
+}
+.click-button {
+    font-family: 'Young Serif', sans-serif;
+    border: none;
+    background-color: rgb(124, 104, 125);
     color: white;
-    -webkit-text-stroke: 5px  rgb(4, 106, 181);
-    paint-order: stroke fill;
+    font-size: large;
+    padding: 5px;
+    padding-inline: 10px;
+    border-radius: 8px;
+
+    &:hover {
+        background-color: rgb(103, 83, 104);;
+    }
 }
 
 
@@ -280,4 +260,19 @@ body {
     50% { transform: translateX(-5px) }
     75% { transform: translateX(5px) }
     100% { transform: translateX(0) }
+}
+@keyframes red {
+    0% {
+        color: red;
+    }
+    50% {
+        color: inherit;
+    }
+    100% {
+        color: inherit;
+    }
+}
+
+.red {
+    animation: red 0.5s ease-out;
 }

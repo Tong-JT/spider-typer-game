@@ -15,19 +15,32 @@
     <body>
         <!-- Entry popup - Asks user for start distance from spider and submit button to start run -->
         <div class="popup-overlay" id="popupOverlay">
-            <div class="settings-menu" id="popup">
+            <div class="popup-menu">
                 <div id="settings-screen">
-                    <div class="settings-header">
-                        <h1 id="settings-header-text"><span>Oh no! You've awakened the beast!</span></h1>
-                        <span class="close" id="closePopup">&times;</span>
+                    <div class="menu-header">
+                        <h1 class="header-text"><span>Oh no! You've awakened the beast!</span></h1>
                     </div>
-                    <div class="popup-content">
-                        <p>Your only hope of survival is your typing speed! You must type words fast and accurately. The quicker you type, the faster you run, but if you make too many mistakes, the spider will gain on you!</p>
+                    <div class="menu-contents">
+                        Your only hope of survival is your typing speed! You must type words fast and accurately. The quicker you type, the faster you run. But beware! Mistakes will cost your precious distance and could cause the spider to catch up!
                     </div>
+                    <button id="entry-button" class="click-button">Start run</button>
                 </div>
             </div>
         </div>
 
+        <div class="popup-overlay" id="gameoverOverlay">
+            <div class="popup-menu">
+                <div id="settings-screen">
+                    <div class="menu-header">
+                        <h1 class="header-text"><span>Game over!</span></h1>
+                    </div>
+                    <div class="menu-contents">
+                        The beast has caught you. Your journey is now over.
+                    </div>
+                </div>
+                <button id="restart-game" class="click-button">Restart</button>
+            </div>
+        </div>
 
 
 
@@ -52,21 +65,7 @@
                     <div id="text-printing"></div>
                     <input type="text" id="input-field" autofocus placeholder="Begin typing to start run...">                    
                 </div>
-                <div id="ctrl-label">
-                    <p id="ctrl">Ctrl</p>
-                </div>
             </div>
-
-            <!-- <div id="mini-typer">
-                <div id="mini-header">
-                    Mini spiders
-                </div>
-                <div id="mini-spider-sidebar">
-
-                </div>
-
-            </div> -->
-
         </div>
         
 

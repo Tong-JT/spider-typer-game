@@ -13,21 +13,6 @@ async function generateQuote() {
     }
 }
 
-// // Generates a random word using an API
-// async function generateWord() {
-//     const url = "https://random-word-api.vercel.app/api?words=1";
-//     try {
-//         const response = await fetch(url);
-//         if (!response.ok) {
-//             throw new Error(`Response status: ${response.status}`);
-//         }
-//         const json = await response.json();
-//         return json[0];
-//     } catch (error) {
-//         console.error(error.message);
-//     }
-// }
-
 let textArea = document.getElementById('text-printing');
 let inputField = document.getElementById("input-field");
 let currentQuote = "";
@@ -147,12 +132,17 @@ document.addEventListener('keydown', function(event) {
 });
 
 function stopGame() {
+    document.getElementById('main-character').style.display = 'none';
     clearInterval(timer);
-    inputField.disabled = true;
-    alert("Game Over! Distance has reached 0.");
+    gameoverScreen();
 }
 
+function gameoverScreen() {
+    let gameover = document.getElementById("gameoverOverlay");
+    gameover.style.display = "block";
+}
 
+let correctCharacterCount = 0;
 function listenForInput() {
     let typedText = inputField.value;
     typedCharacterCount++;
@@ -177,6 +167,7 @@ function listenForInput() {
             quoteSpan.classList.add('incorrect');
             quoteSpan.classList.remove('correct');
             errorCount++;
+            subtractTimeFromDistance();
         }
 
         charIndex++;
@@ -184,25 +175,22 @@ function listenForInput() {
 
     let errors = document.getElementById("errors");
     errors.textContent = errorCount;
-    console.log(typedCharacterCount)
 
     if (charIndex === currentQuote.length) {
         newQuote();
     }
 }
 
-// // Mini spider event - Spider image animation, spider type box generation
-// async function startMiniSpiderEvent() {
-//     let sidebar = document.getElementById('mini-spider-sidebar');
-//     let miniSpiderTypeBox = document.createElement('div');
-//     const word = await generateWord();
-
-//     miniSpiderTypeBox.className = 'mini-spider-type-box';
-//     miniSpiderTypeBox.innerHTML = `
-//         <p class="mini-word">${word}</p>
-//     `;
-//     sidebar.appendChild(miniSpiderTypeBox);
-// }
+function subtractTimeFromDistance() {
+    let distance = document.getElementById("distance-num");
+    let distanceNum = parseInt(distance.innerText);
+    distanceNum -= 15;
+    distance.innerText = Math.max(distanceNum, 0);
+    distance.classList.add('red');
+    setTimeout(() => {
+        distance.classList.remove('red');
+    }, 500);
+}
 
 function setUpScreen() {
     newQuote();
@@ -220,23 +208,10 @@ function setUpScreen() {
 
 setUpScreen();
 
-document.addEventListener('DOMContentLoaded', function () {
+document.getElementById("entry-button").addEventListener("click", function(event) {
+    document.getElementById('popupOverlay').style.display = 'none';
+});
 
-    const popupOverlay = document.getElementById('popupOverlay');
-    const closePopup = document.getElementById('closePopup');
-
-    function openPopup() {
-        popupOverlay.style.display = 'block';
-    }
-    function closePopupFunc() {
-        popupOverlay.style.display = 'none';
-    }
-
-    openPopup();
-    closePopup.addEventListener('click', closePopupFunc);
-    popupOverlay.addEventListener('click', function (event) {
-        if (event.target === popupOverlay) {
-            closePopupFunc();
-        }
-    });
+document.getElementById("restart-game").addEventListener("click", function() {
+    location.reload();
 });
