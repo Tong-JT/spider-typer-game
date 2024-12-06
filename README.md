@@ -12,7 +12,7 @@ An speed typing game built using **HTML**, **CSS**, and **JavaScript**.
 
 ### Live Site
 
-Spider Typer is available to play on desktop and mobile here: [Spider Typer](https://tong-jt.github.io/SpiderTyperGame/)
+Spider Typer is available to play on desktop and mobile here: [Spider Typer](https://tong-jt.github.io/spider-typer-game/)
 
 ### Tech Stack
 
@@ -25,7 +25,7 @@ Spider Typer is available to play on desktop and mobile here: [Spider Typer](htt
 Simply clone the repository to your machine.
 
 ```
-git clone https://github.com/Tong-JT/SpiderTyperGame.git
+git clone https://github.com/Tong-JT/spider-typer-game.git
 ```
 Once the repository is cloned, you can can start developing on your chosen IDE. To run JavaScript in your browser and avoid CORS related errors, run the code via a local development server such as XAMPP. I used the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension on VSCode.
 
