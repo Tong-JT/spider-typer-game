@@ -31,7 +31,7 @@ Once the repository is cloned, you can can start developing on your chosen IDE. 
 
 ### History
 *Developed for a university assignment (Victoria University of Wellington - Master of Software Development)*
-This program is the frontend-only version of the submitted assignment, which will be available on Github soon.
+This program is the frontend-only version of the submitted assignment, which will can be accessed on [Github](https://github.com/Tong-JT/spider-typer-fullstack).
 
 - Created: 28th November 2024
 - Completed: 1st December 2024
